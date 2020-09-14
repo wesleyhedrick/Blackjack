@@ -46,7 +46,7 @@ Ace of Diamonds:
 
 Rather than manually code a whole deck of cards, we can write a function to generate a deck of 52 cards. Create a function `buildDeck` returns a new array with 52 card objects. There are 4 suits: diamonds, clubs, hearts and spades. For each suit there is a rank from 1 to 13.
 
-### Step 7: Deal the deck
+## Step 7: Deal the deck
 Now that we have a deck of cards, we want to make use of it. We're going to need to create something to represent the player and dealer hands so go ahead and create two new arrays:
   * dealerHand
   * playerHand
@@ -59,7 +59,7 @@ Adjust the code so that when we click the "Deal" button, it will remove a card f
 
 Gameplay should still deal the same as before: 1 card each to player, dealer, player, dealer.
 
-### Step 7b: Image From Cards
+### Step 7.1: Image From Cards
 As you will have noticed, we have a whole folder of images with the following naming structure:
 
 `images/{rank}_of_{suit}.png`
@@ -85,7 +85,7 @@ const newCardImage = getCardImage(card)
 document.body.append(newCardImage);
 ```
 
-### Step 7c: Render Hands
+### Step 7.2: Render Hands
 
 Now that we have a way to create an image based on a card object, we need to display the player hand and the dealer hand on the page.
 
@@ -96,7 +96,7 @@ Write a function to shuffle the deck. Here are some strategies for shuffling the
 
 * For fixed number of times, randomly choose 2 cards within the deck and swap them.
 * Create a new array, randomly choose one card after another from the original array and push it to the new array.
-* Search on stackOverflow for a solution to "shuffle a javascript array"
+* Search on StackOverflow for a solution to "shuffle a javascript array"
 
 Use the shuffle function to shuffle the deck when you hit the deal button but before you deal the cards.
 
