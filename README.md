@@ -1,4 +1,9 @@
 # Blackjack
+
+In this exercise, you will be creating a Blackjack game. You will make use of event listeners, DOM elements, attributes, template strings, loops and functions using HTML, CSS and JavaScript.
+
+Follow the steps below to get started.
+
 ## Step 1: Familiarise yourself with the HTML and JS
 
 This project comes with some HTML and some JavaScript already included. Familiarise yourself with the HTML that is already there to see what DOM elements the browser will create when the document is loaded by the browser.
@@ -59,7 +64,7 @@ Adjust the code so that when we click the "Deal" button, it will remove a card f
 
 Gameplay should still deal the same as before: 1 card each to player, dealer, player, dealer.
 
-### Step 7.1: Image From Cards
+## Step 8: Image From Cards
 As you will have noticed, we have a whole folder of images with the following naming structure:
 
 `images/{rank}_of_{suit}.png`
@@ -85,13 +90,13 @@ const newCardImage = getCardImage(card)
 document.body.append(newCardImage);
 ```
 
-### Step 7.2: Render Hands
+## Step 9: Render Hands
 
 Now that we have a way to create an image based on a card object, we need to display the player hand and the dealer hand on the page.
 
 Write a function `render` that loops over the `dealerHand` and `playerHand` arrays and appends a new card image to the appropriate elements for each card in the hands.
 
-## Step 8: Shuffle the deck
+## Step 10: Shuffle the deck
 Write a function to shuffle the deck. Here are some strategies for shuffling the deck:
 
 * For fixed number of times, randomly choose 2 cards within the deck and swap them.
@@ -100,7 +105,7 @@ Write a function to shuffle the deck. Here are some strategies for shuffling the
 
 Use the shuffle function to shuffle the deck when you hit the deal button but before you deal the cards.
 
-## Step 9: Calculate points for a hand
+## Step 11: Calculate points for a hand
 Write a function `calculatePoints` that takes in an array of card objects and returns the points for that hand. Example:
 
 ```js
@@ -123,19 +128,19 @@ console.log(playerPoints);
 // 21
 ```
 
-## Step 9: Display points
+## Step 12: Display points
 After dealing any card, display the current points for the dealer and the player. You may want to consider adding this code to your `render` function.
 
-## Step 10: Busts
+## Step 13: Busts
 Check for busts after each card is dealt. A bust is when either the dealer or the player's hand go over 21 points. When that happens, they lose. If there is a bust, display a message on the page saying that they busted. There is a `div` with an `id` of `messages` already on the page that you can use to do this.
 
-## Step 10: Player stands
+## Step 14: Player stands
 When the "Stand" button is clicked, the player doesn't want any more cards. Deal cards to the dealer until he reaches 17 points or more.
 
-## Step 11: Determine winner
+## Step 15: Determine winner
 When the dealer's turn is over, whoever has the most points wins. Determine the winner. Display a message to show who won. You might also want to disable the "Deal", "Hit", and "Stand" buttons at this point.
 
-## Step 12: Restart game
+## Step 16: Restart game
 The last step is to be able to reset the game. What is involved with this? Is there code we can reuse? Is there a way to reset the dealer and player hands? What about the buttons? Do they need to be re-enabled? The messages? 
 
 ## Bonus
