@@ -44,9 +44,7 @@ Ace of Diamonds:
 { rank: 1, suit: 'diamonds' }
 ```
 
-Rather than manually code a whole deck of cards, we can write a function to generate a deck of 52 cards. A deck of cards has 
-
-Create a function buildDeck returns a new array with 52 card objects. There are 4 suits: diamonds, clubs, hearts and spades. For each suit there is a rank from 1 to 13.
+Rather than manually code a whole deck of cards, we can write a function to generate a deck of 52 cards. Create a function buildDeck returns a new array with 52 card objects. There are 4 suits: diamonds, clubs, hearts and spades. For each suit there is a rank from 1 to 13.
 
 ## Step 7: Deal the deck
 Now that we have a deck of cards, we want to make use of it. We're going to need to create something to represent the player and dealer hands so go ahead and create two new arrays:
