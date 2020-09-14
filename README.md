@@ -1,13 +1,21 @@
 # Blackjack
 
-In this exercise, you will be creating a Blackjack game. You will make use of event listeners, DOM elements, attributes, template strings, loops and functions using HTML, CSS and JavaScript.
+In this exercise, you will be creating a Blackjack game. If you are unfamiliar with the rules of blackjack, please watch [this video](https://www.youtube.com/watch?v=eyoh-Ku9TCI). Note that these instructions do not implement betting; only wins/losses.
+
+You will make use of the following techniques:
+* Selecting DOM elements using JavaScript
+* Adding event listeners to DOM elements
+* Creating new DOM Elements
+* Setting DOM element Attributes
+* Using template strings
+* Loops (and nested loops)
+* HTML and CSS
 
 Follow the steps below to get started.
 
 ## Step 1: Familiarise yourself with the HTML and JS
 
 This project comes with some HTML and some JavaScript already included. Familiarise yourself with the HTML that is already there to see what DOM elements the browser will create when the document is loaded by the browser.
-
 
 ## Step 2: Style the page
 Style the page to make it look more like a card table. This exercise is less about styling, so do not spend more than ___45-60 minutes___ on styling at this time. You can always revisit the styling later. Here is an example:
