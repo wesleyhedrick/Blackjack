@@ -8,7 +8,6 @@ function createDeck() {
             deck.push(obj);
         }
     })
-
     deck.forEach((item) => {
         
         switch(item.rank){
@@ -38,11 +37,15 @@ function createDeck() {
         deck[i] = deck[j]
         deck[j] = temp
     }
-
     return deck;
 }
 
 function deal(deck){   
+    let bust = document.querySelector('.bust');
+    if(bust.style.top == '10%') {
+        location.reload();
+    }
+    
     appendItemsToDom(buildInitialDeal(deck));
     moveCards();
     displayScore('player');
@@ -52,17 +55,34 @@ function deal(deck){
 function displayScore(person) {
     scoreDiv = document.querySelector(`.${person}-score`)
     scoreDiv.classList.remove('hidden');
+    scoreDiv.style.display = 'flex';
 }
 
 function updateScore(score){
+    let bust = document.querySelector('.bust');
     let scoreDiv = document.querySelector('.player-score');
     let presentScore = parseInt(scoreDiv.innerText);
+    let deal = document.querySelector('.deal');
+    let leftButtons = document.querySelector('.hiddenleft');
+    let rightButtons = document.querySelector('.hiddenright');
     presentScore += score;
+
     scoreDiv.innerText = presentScore;
     if(presentScore > 21) {
-        console.log('Player Busts')   
+        console.log('Player Busts')
+        bust.style.top = '10%';
+        bust.innerText = 'Bust!!'
+        deal.style.left = '80%'
+        leftButtons.style.left = '-120px';
+        rightButtons.style.left = '110%'
+
     } else if(presentScore == 21) {
         console.log('Player Blackjack')
+        bust.style.top = '10%';
+        bust.innerText = 'Blackjack!!'
+        deal.style.left = '80%'
+        leftButtons.style.left = '-120px';
+        rightButtons.style.left = '110%'
     }   
 }
 
@@ -104,6 +124,26 @@ function buildInitialDeal(deck){
     return dealerAndPlayerDeck;
 }
 
+function clearAndDeal() {
+    let bust = document.querySelector('.bust');
+    let playerscoreDiv = document.querySelector('.player-score');
+    let dealerScoreDiv = document.querySelector('.dealer-score');
+    let cards = document.querySelectorAll('card');
+    let dealerHiddenCard = document.querySelector('image-container');
+    //hide bust
+    bust.style.top = '50%';
+    //hide player and dealer score
+    playerscoreDiv.classList.add('hidden');
+    dealerscoreDiv.classList.add('hidden');
+    //remove cards
+    cards.forEach((card) => {
+        card.remove();
+    });
+    //remove dealer hidden card
+    dealerHiddenCard.remove()
+
+
+}
 function appendItemsToDom(deck){
     let rank;
     let suit;
@@ -138,10 +178,9 @@ function moveCards() {
         setTimeout(() => {
             dealer1.style.top = `8%`;
             dealer1.style.left = `30%` 
-            dealer1.style.transform = `rotate(${Math.floor(Math.random() * rotationMax)+1}deg)`;
             setTimeout(() => {
                 player2.style.top = `70%`;
-                player2.style.left = `50%`
+                player2.style.left = `40%`
                 player2.style.transform = `rotate(${Math.floor(Math.random() * rotationMax)}deg)`;
                 setTimeout(() => {
                     flippedCard.style.top = '8%';
@@ -175,8 +214,7 @@ function displayPlayButtons(){
     left.style.left = `10%`;
     right.style.top = `60%`;
     right.style.left = `80%`;
-    deal.style.top = `80%`;
-    deal.style.left = `100%`;
+    deal.style.left = `110%`;
 
 }
 
@@ -191,24 +229,25 @@ function hit(deck) {
     img.classList.add('card-to-be-hit')
     body.append(img)
     updateScore(card.value);
+    console.log(`${rank} of ${suit}'s value is ${card.value}`)
 
 
 }
 
-
-function flipCard() {
-     let front = document.querySelector('.image-front');
-     let back = document.querySelector('.image-back');
-     front.style.transform = 'rotateY(0deg)';
-     back.style.transform = 'rotateY(180deg)';
-}
 function move(person) {
     let img = document.querySelector('.card-to-be-hit');
+    let lastCardHit = document.querySelector('.card-last-hit');
+    let position; 
+    lastCardHit ? position = parseInt(lastCardHit.style.left) + 5 : position = 50;
+    lastCardHit ? lastCardHit.classList.toggle('card-last-hit'): 
+
+    console.log('position is ' + position)
     if(person == 'player'){
         img.style.top = '70%';
-        img.style.left = '60%';
-        img.style.transform = `rotate(${Math.floor(Math.random() * 6)})`;
+        img.style.left = `${position}%`;
         img.classList.remove('card-to-be-hit')
+        img.classList.toggle('card-last-hit')
+        img.style.transform = `rotate(${Math.floor(Math.random() * 6)}deg)`;
     } else {
         img.style.top = '8%';
         img.style.left = '49%'
@@ -216,6 +255,12 @@ function move(person) {
 
     img.style.transform = `rotate(${Math.floor(Math.random() * 6)})`;
     img.classList.remove('card-to-be-hit')
+}
+function flipCard() {
+     let front = document.querySelector('.image-front');
+     let back = document.querySelector('.image-back');
+     front.style.transform = 'rotateY(0deg)';
+     back.style.transform = 'rotateY(180deg)';
 }
 
 function hitDealer(deck) {
@@ -246,6 +291,12 @@ function dealOutDealer(deck, playerScore){
     let dealerScore = parseInt(document.querySelector('.dealer-score').innerText);
     let card;
     let dealToWinArray = [];
+    let banner = document.querySelector('.bust');
+    let hiddenLeft = document.querySelector('.hiddenleft');
+    let hiddenRight = document.querySelector('.hiddenright');
+    let deal = document.querySelector('.deal');
+
+    console.log(banner);
     while(dealerScore <= 17) {
         card = deck.pop()
         dealToWinArray.push(card);
@@ -255,18 +306,49 @@ function dealOutDealer(deck, playerScore){
     
     if(dealerScore == 21){
         console.log('dealer blackjack')
+        banner.innerText = 'Dealer Blackjack';
+        banner.style.top = '10%';
+
+
     } else if(dealerScore >21) {
         console.log('dealer busts')
+        banner.innerText = 'Dealer Busts';
+        banner.style.top = '10%';
     } else if(dealerScore < 21){
         if(dealerScore > playerScore){
             console.log('dealer wins');
+            console.log(dealerScore, playerScore)
+            banner.innerText = 'Dealer wins';
+            banner.style.top = '10%';
         } else {
             console.log('player wins')
+            console.log('dealer wins');
+            console.log(dealerScore, playerScore)
+            banner.innerText = 'You win!';
+            banner.style.top = '10%';
         }
         
     }
+    hiddenLeft.style.left = '-30%';
+    hiddenRight.style.left = '110%';
+    deal.style.left = '80%';
 }
 
+
+let buttons = document.querySelectorAll('.button-inner');
+
+buttons.forEach((button) => {
+    addEventListener('mousedown', (e) => {
+    e.target.classList.toggle('clicked');
+    e.target.style.boxShadow = 'inset 0 0 0 4px gold';
+})});
+
+
+buttons.forEach((button) => {
+    addEventListener('mouseup', (e) => {
+        e.target.classList.toggle('clicked');
+        e.target.style.boxShadow = 'inset 0 0 2px 0px gold';
+    })});
 
 
 let dealButton = document.querySelector('.deal');
@@ -285,13 +367,14 @@ hitButton.addEventListener('click', () => {
 function revealDealerScore() {
     let dealerScoreDiv = document.querySelector('.dealer-score');
     dealerScoreDiv.classList.remove('hidden');
+    dealerScoreDiv.style.display = 'flex';
     let dealerScore = parseInt(dealerScoreDiv.innerText);
     return dealerScore
 }
 
 let stayButton = document.querySelector('.stay');
 stayButton.addEventListener('click', () => {
-    let playerScore = parseInt(document.querySelector('.player-score'));
+    let playerScore = parseInt(document.querySelector('.player-score').innerText);
     revealDealerScore();
     flipCard();
     dealOutDealer(deck, playerScore);

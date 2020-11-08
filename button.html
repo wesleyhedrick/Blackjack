@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css2?family=Goldman&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+    .clicked {
+        font-size: 0.9em;
+    }
+    
+    .button {
+        width: 100px;
+        height: 100px;
+        background-image: linear-gradient(to right, #614385, #516395);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 10px;
+        
+    }
+
+    .button-inner {
+        background-image: linear-gradient(to right, #614385, #516395);
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Goldman', cursive;
+        color: white;
+        box-shadow: inset 0px 0px 2px 0px gold;
+    }
+
+    </style>
+</head>
+<body>
+        <div class="wrapper">
+            <div class="button hit hidden">
+                <div class="button-inner">HIT</div>
+            </div>
+        </div>
+<script>
+    let button = document.querySelector('.button-inner');
+    button.addEventListener('mousedown', (e) => {
+        console.log(e.target)
+        button.classList.toggle('clicked');
+        button.style.boxShadow = 'inset 0 0 0 2px gold';
+    })
+    button.addEventListener('mouseup', () => {
+        button.classList.toggle('clicked');
+        button.style.boxShadow = 'inset 0 0 2px 0px gold';
+    })
+</script>
+</body>
+</html>
