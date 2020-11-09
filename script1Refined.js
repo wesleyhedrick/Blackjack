@@ -71,22 +71,13 @@ function updateScore(score){
     presentScore += score;
 
     scoreDiv.innerText = presentScore;
-    if(presentScore > 21) {
-        console.log('Player Busts')
-        bust.style.top = '10%';
-        bust.innerText = 'Bust!!'
-        deal.style.left = '80%'
-        leftButtons.style.left = '-120px';
-        rightButtons.style.left = '110%'
-
+    if(presentScore > 21){
+        lowerBanner('Player bust!!!')
     } else if(presentScore == 21) {
-        console.log('Player Blackjack')
-        bust.style.top = '10%';
-        bust.innerText = 'Blackjack!!'
-        deal.style.left = '80%'
-        leftButtons.style.left = '-120px';
-        rightButtons.style.left = '110%'
-    }   
+        lowerBanner('Blackjack!!!')
+    }
+    
+
 }
 
 function buildInitialDeal(deck){
@@ -111,15 +102,7 @@ function buildInitialDeal(deck){
         dealerScore += card.value
     }
     
-    createInitialScore(body, playerScore, dealerScore);
-    
-    let dealerAndPlayerDeck =[];  
-    dealerAndPlayerDeck.push(playerDeck);
-    dealerAndPlayerDeck.push(dealerDeck);
-    return dealerAndPlayerDeck;
-}
-
-function createInitialScore(body, playerScore, dealerScore){
+    //Create initial score
     playerScoreDisplay = document.createElement('div');
     dealerScoreDisplay = document.createElement('div');
     playerScoreDisplay.classList.add('player-score', 'hidden');
@@ -128,8 +111,33 @@ function createInitialScore(body, playerScore, dealerScore){
     dealerScoreDisplay.innerText = dealerScore;
     body.append(playerScoreDisplay);
     body.append(dealerScoreDisplay);
+
+    let dealerAndPlayerDeck =[];  
+    dealerAndPlayerDeck.push(playerDeck);
+    dealerAndPlayerDeck.push(dealerDeck);
+    return dealerAndPlayerDeck;
 }
 
+function clearAndDeal() {
+    let bust = document.querySelector('.bust');
+    let playerscoreDiv = document.querySelector('.player-score');
+    let dealerScoreDiv = document.querySelector('.dealer-score');
+    let cards = document.querySelectorAll('card');
+    let dealerHiddenCard = document.querySelector('image-container');
+    //hide bust
+    bust.style.top = '50%';
+    //hide player and dealer score
+    playerscoreDiv.classList.add('hidden');
+    dealerscoreDiv.classList.add('hidden');
+    //remove cards
+    cards.forEach((card) => {
+        card.remove();
+    });
+    //remove dealer hidden card
+    dealerHiddenCard.remove()
+
+
+}
 function appendItemsToDom(deck){
     let rank;
     let suit;
@@ -149,6 +157,18 @@ function appendItemsToDom(deck){
     createHiddenDealerCard()
 }
 
+function lowerBanner(msg){
+    let bust = document.querySelector('.bust');
+    let leftButtons = document.querySelector('.hiddenleft');
+    let rightButtons = document.querySelector('.hiddenright');
+    let deal = document.querySelector('.deal');
+    bust.style.top = '10%';
+    bust.innerText = msg;
+    leftButtons.style.left = '-30%';
+    rightButtons.style.left = '110%';
+    deal.style.left = '80%';
+
+}
 
 function moveCards() {
     let player1 = document.querySelector('.player0');
@@ -189,6 +209,7 @@ function createHiddenDealerCard() {
     imageContainer.append(flippedCard);
     imageContainer.append(imageBack);
     body.append(imageContainer);
+    
 }
 
 function displayPlayButtons(){
@@ -280,6 +301,7 @@ function dealOutDealer(deck, playerScore){
     let hiddenLeft = document.querySelector('.hiddenleft');
     let hiddenRight = document.querySelector('.hiddenright');
     let deal = document.querySelector('.deal');
+    let msg; 
 
     console.log(banner);
     while(dealerScore <= 17) {
@@ -288,35 +310,21 @@ function dealOutDealer(deck, playerScore){
         dealerScore += card.value;
         console.log('The score is ' + dealerScore)
     }
+
     
     if(dealerScore == 21){
-        console.log('dealer blackjack')
-        banner.innerText = 'Dealer Blackjack';
-        banner.style.top = '10%';
-
-
+        msg = 'Dealer Blackjack'
     } else if(dealerScore >21) {
-        console.log('dealer busts')
-        banner.innerText = 'Dealer Busts';
-        banner.style.top = '10%';
-    } else if(dealerScore < 21){
+        msg = 'Dealer busts!!!'
+    } else {
         if(dealerScore > playerScore){
-            console.log('dealer wins');
-            console.log(dealerScore, playerScore)
-            banner.innerText = 'Dealer wins';
-            banner.style.top = '10%';
+            msg = 'Dealer wins'
         } else {
-            console.log('player wins')
-            console.log('dealer wins');
-            console.log(dealerScore, playerScore)
-            banner.innerText = 'You win!';
-            banner.style.top = '10%';
+            msg = 'You win!'
         }
-        
     }
-    hiddenLeft.style.left = '-30%';
-    hiddenRight.style.left = '110%';
-    deal.style.left = '80%';
+
+    lowerBanner(msg);
 }
 
 
