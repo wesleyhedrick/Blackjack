@@ -313,12 +313,12 @@ function dealOutDealer(deck, playerScore){
 
     
     if(dealerScore == 21){
-        msg = 'Dealer Blackjack'
+        msg = 'Dealer dealt to 21\nDealer Blackjack'
     } else if(dealerScore >21) {
-        msg = 'Dealer busts!!!'
+        msg = 'Dealer overdealt\nDealer busts!!!'
     } else {
         if(dealerScore > playerScore){
-            msg = 'Dealer wins'
+            msg = `Dealer dealt to ${dealerScore}.\nDealer wins`
         } else {
             msg = 'You win!'
         }
