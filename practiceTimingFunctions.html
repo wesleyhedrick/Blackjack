@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+   
+<script>
+
+console.log('Say hi')
+function sayHi(){
+    console.log('Hello');
+}
+
+async function callFunctionsWithDelays(num, func, delay) {
+    for (i = 0; i < num.length; i++) {
+         func.call()
+         await new Promise(resolve, setTimeout(resolve, delay))
+    }
+}
+
+callFunctionsWithDelays(4, sayHi, 1000)
+
+</script>
+</body>
+</html>

@@ -42,7 +42,7 @@ function createDeck() {
 
 function deal(deck){   
     let bust = document.querySelector('.bust');
-    if(bust.style.top == '10%') {
+    if(bust.style.top >'10%') {
         location.reload();
         appendItemsToDom(buildInitialDeal(deck));
         moveCards();
@@ -162,7 +162,7 @@ function lowerBanner(msg){
     let leftButtons = document.querySelector('.hiddenleft');
     let rightButtons = document.querySelector('.hiddenright');
     let deal = document.querySelector('.deal');
-    bust.style.top = '10%';
+    bust.style.top = '35%';
     bust.innerText = msg;
     leftButtons.style.left = '-30%';
     rightButtons.style.left = '110%';
@@ -194,7 +194,6 @@ function moveCards() {
                 
             }, 200)}, 200)}, 100)}, 200)
     
-
 }
 
 function createHiddenDealerCard() {
